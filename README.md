@@ -47,6 +47,10 @@ Ao hospedar a aplicação, configure o servidor para devolver `index.html` nas r
 - Ao salvar, os dados ficam somente no `localStorage` do navegador, sob a chave `autenticflow.customers`. A página Clientes permite conferir os registros locais e o botão Cancelar retorna a ela sem salvar o formulário atual.
 - O adaptador local em `src/features/customers/customer-service.ts` deve ser substituído pela chamada REST na integração futura. O formulário já recebe valores iniciais e callbacks, permitindo seu reaproveitamento na edição.
 
+Ao abrir Clientes ou Dashboard pela primeira vez, a base de demonstração é criada no navegador. Ela tem 150 clientes fictícios: 60 Leads, 35 Propostas, 40 Clientes e 15 Inativos, distribuídos ao longo dos últimos 12 meses. A listagem permite busca por nome, e-mail e empresa, filtro de status, edição do nome e exclusão. O botão “Restaurar dados de demonstração” recria a base original e remove alterações locais.
+
+Receita, conversão, clientes em potencial e atividades recentes do Dashboard usam essa mesma base. Cada registro inclui responsável comercial, última interação e valor de venda fictício quando aplicável.
+
 ## Onde fazer manutenção
 
 | Alteração                                  | Arquivo ou pasta                                                     |

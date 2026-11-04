@@ -13,9 +13,13 @@ export interface CustomerInput {
   phone?: string
   company?: string
   status: CustomerStatus
+  tags?: string[]
 }
 
 export interface Customer extends CustomerInput {
   id: string
   createdAt: string
+  lastInteraction?: string
+  owner?: string
+  saleValue?: number
 }

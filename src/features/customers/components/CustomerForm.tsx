@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { LoaderCircle, Save } from 'lucide-react'
+import { LoaderCircle, Plus, Save, X } from 'lucide-react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Button } from '@/components/ui/button'
 import { FormField } from '@/components/ui/form-field'
@@ -21,6 +22,7 @@ const initialValues: CustomerFormValues = {
   phone: '',
   company: '',
   status: 'Lead',
+  tags: [],
 }
 
 export function CustomerForm({
@@ -40,10 +42,21 @@ export function CustomerForm({
     mode: 'onBlur',
   })
   const phone = register('phone')
+  const [tags, setTags] = useState(defaultValues.tags ?? [])
+  const [tagInput, setTagInput] = useState('')
+  const addTag = () => {
+    const tag = tagInput.trim()
+    if (
+      tag &&
+      !tags.some((item) => item.toLocaleLowerCase() === tag.toLocaleLowerCase())
+    )
+      setTags([...tags, tag])
+    setTagInput('')
+  }
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit((values) => onSubmit({ ...values, tags }))}
       noValidate
       aria-busy={isSaving}
       className="space-y-6"
@@ -62,6 +75,57 @@ export function CustomerForm({
           aria-describedby={errors.name ? 'customer-name-error' : undefined}
           {...register('name')}
         />
+      </FormField>
+
+      <FormField id="customer-tags" label="Tags">
+        <div className="flex gap-2">
+          <Input
+            id="customer-tags"
+            placeholder="Ex.: VIP, Prioritário"
+            value={tagInput}
+            disabled={isSaving}
+            onChange={(event) => setTagInput(event.target.value)}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter') {
+                event.preventDefault()
+                addTag()
+              }
+            }}
+          />
+          <Button
+            type="button"
+            size="icon"
+            aria-label="Adicionar tag"
+            className="bg-indigo-600 hover:bg-violet-700"
+            disabled={isSaving}
+            onClick={addTag}
+          >
+            <Plus size={18} />
+          </Button>
+        </div>
+        {tags.length > 0 && (
+          <div className="mt-3 flex flex-wrap gap-2">
+            {tags.map((tag, index) => (
+              <span
+                key={tag}
+                className={
+                  index % 2
+                    ? 'inline-flex items-center gap-1 rounded-full bg-violet-100 px-3 py-1 text-xs font-medium text-violet-700'
+                    : 'inline-flex items-center gap-1 rounded-full bg-blue-100 px-3 py-1 text-xs font-medium text-blue-700'
+                }
+              >
+                {tag}
+                <button
+                  type="button"
+                  aria-label={`Remover tag ${tag}`}
+                  onClick={() => setTags(tags.filter((item) => item !== tag))}
+                >
+                  <X size={13} />
+                </button>
+              </span>
+            ))}
+          </div>
+        )}
       </FormField>
 
       <FormField
@@ -137,7 +201,13 @@ export function CustomerForm({
         >
           {customerStatuses.map((status) => (
             <option key={status} value={status}>
-              {status}
+              {status === 'Lead'
+                ? '● Lead'
+                : status === 'Proposta'
+                  ? '● Proposta'
+                  : status === 'Cliente'
+                    ? '● Cliente'
+                    : '● Inativo'}
             </option>
           ))}
         </select>

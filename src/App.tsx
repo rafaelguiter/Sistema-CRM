@@ -18,6 +18,11 @@ const NewCustomerPage = lazy(() =>
     default: module.NewCustomerPage,
   })),
 )
+const CustomerProfilePage = lazy(() =>
+  import('./features/customers/CustomerProfilePage').then((module) => ({
+    default: module.CustomerProfilePage,
+  })),
+)
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { session } = useAuth()
@@ -61,6 +66,14 @@ export default function App() {
               element={
                 <ProtectedRoute>
                   <NewCustomerPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/clientes/:id"
+              element={
+                <ProtectedRoute>
+                  <CustomerProfilePage />
                 </ProtectedRoute>
               }
             />

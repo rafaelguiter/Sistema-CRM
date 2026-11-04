@@ -11,6 +11,7 @@ export const customerSchema = z.object({
   phone: z.string().optional(),
   company: z.string().trim().optional(),
   status: z.enum(customerStatuses),
+  tags: z.array(z.string().trim().min(1)).default([]),
 })
 
 export type CustomerFormValues = z.input<typeof customerSchema>

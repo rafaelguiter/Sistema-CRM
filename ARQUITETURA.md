@@ -88,6 +88,8 @@ As rotas protegidas `/clientes` e `/clientes/novo` pertencem à funcionalidade `
 
 `localCustomerService` simula um salvamento assíncrono e persiste `Customer` em `localStorage`, na chave `autenticflow.customers`. Ao integrar a API REST, preserve `CustomerInput`, `Customer` e `CustomerService`, substitua o adaptador e troque a leitura local da listagem por uma camada de consulta. Não há banco de dados, nem requisições de rede nesta etapa.
 
+`demo.ts` cria deterministicamente a base com 150 clientes fictícios; `demo-storage.ts` a inicializa uma única vez e permite ao Dashboard e à listagem usarem a mesma fonte local. Os campos `lastInteraction`, `owner` e `saleValue` completam os dados necessários para atividades e indicadores. `from-customers.ts` converte a base em snapshot e atividades do Dashboard, evitando números desconectados dos clientes exibidos.
+
 ## Rotas e autenticação simulada
 
 `App.tsx` reúne `BrowserRouter`, `AuthProvider` e as rotas `/login` e `/dashboard`. A raiz e caminhos desconhecidos redirecionam para `/login`. O Dashboard exige uma sessão de demonstração e é importado sob demanda, mantendo sua implementação visual existente.
@@ -138,3 +140,5 @@ Registre aqui cada alteração estrutural ou decisão técnica para facilitar a 
 - 2026-11-04: Dashboard reorganizado por funcionalidade; extraídos layout compartilhado, componentes visuais, tipos, cálculos, hook de dados e estilos. Adicionados testes dos cálculos, Prettier e guia de manutenção, sem novos módulos.
 - 2026-11-04: adicionada tela de login responsiva com validação, alternância de senha, lembrar de mim, carregamento e autenticação simulada; integradas as rotas `/login` e `/dashboard`, com Dashboard sob demanda. Acrescentados componentes de formulário reutilizáveis e testes unitários e de navegador. Dashboard preservado, sem API, recuperação de senha real ou banco de dados.
 - 2026-11-04: adicionados Clientes e Cadastro de Cliente em `/clientes` e `/clientes/novo`, com formulário React Hook Form + Zod, máscara de telefone, salvamento local, feedback de sucesso e carregamento. Sidebar integrada com rota ativa; criados testes de schema, armazenamento e navegação. Sem API REST, banco de dados ou edição nesta etapa.
+- 2026-11-04: adicionada base local de 150 clientes fictícios, com busca, filtro, edição, exclusão e restauração da demonstração. Dashboard passou a derivar indicadores e atividades dos mesmos clientes, incluindo valores de venda, responsáveis e últimas interações.
+- 2026-11-04: a listagem de Clientes foi substituída por tabela responsiva com busca combinável a filtros de status, ordenação por nome, paginação e badges compartilhados. Adicionada rota protegida `/clientes/:id` para perfil individual com informações de contato, status, tags e responsável comercial.
