@@ -1,0 +1,254 @@
+.app-shell {
+  min-height: 100vh;
+}
+.sidebar {
+  position: fixed;
+  width: 252px;
+  inset: 0 auto 0 0;
+  background: #0b1f3a;
+  color: #cbd5e1;
+  padding: 25px 14px 18px;
+  display: flex;
+  flex-direction: column;
+  z-index: 20;
+}
+.brand {
+  height: 42px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 10px 27px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #263853;
+  color: #fff;
+  font-size: 18px;
+}
+.brand strong span {
+  color: #58a6ff;
+}
+.brand-mark {
+  display: flex;
+  gap: 3px;
+  align-items: end;
+  height: 23px;
+}
+.brand-mark span {
+  display: block;
+  width: 5px;
+  border-radius: 3px;
+  background: #3995f5;
+}
+.brand-mark span:first-child {
+  height: 10px;
+}
+.brand-mark span:nth-child(2) {
+  height: 17px;
+}
+.brand-mark span:nth-child(3) {
+  height: 23px;
+}
+.close {
+  display: none;
+  margin-left: auto;
+  background: none;
+  border: 0;
+  color: #fff;
+}
+.nav-link {
+  height: 45px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: #aebed2;
+  font: 500 14px Inter;
+  padding: 0 12px;
+  margin: 3px 0;
+  text-align: left;
+  cursor: pointer;
+}
+.nav-link.active {
+  box-shadow: inset 3px 0 #4a9eff;
+}
+.nav-link em {
+  margin-left: auto;
+  font-size: 11px;
+  font-style: normal;
+  background: #2b5790;
+  border-radius: 10px;
+  padding: 2px 7px;
+  color: #dfeeff;
+}
+.side-bottom {
+  margin-top: auto;
+}
+.help {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin: 18px 5px 0;
+  border-radius: 10px;
+  padding: 12px 9px;
+  background: #112b4d;
+}
+.help > div {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #274d7a;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  color: #85bffa;
+}
+.help span {
+  display: flex;
+  flex-direction: column;
+  font-size: 11px;
+  gap: 3px;
+}
+.help b {
+  font-size: 12px;
+  color: #e7f0fb;
+}
+.help small {
+  font-size: 10px;
+  color: #8ea4c0;
+}
+.content {
+  margin-left: 252px;
+}
+.topbar {
+  height: 90px;
+  background: white;
+  border-bottom: 1px solid #e9edf3;
+  display: flex;
+  align-items: center;
+  padding: 0 38px;
+  justify-content: space-between;
+}
+.title h1 {
+  font-size: 21px;
+  margin: 0 0 5px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+}
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.icon-button i {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 100%;
+  background: #e34444;
+  border: 1px solid white;
+}
+.profile {
+  border-left: 1px solid #e5eaf1;
+  padding-left: 16px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.avatar {
+  height: 33px;
+  width: 33px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #9dd7ef, #5978ab);
+  display: grid;
+  place-items: center;
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+}
+.profile div:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.profile b {
+  font-size: 12px;
+}
+.profile small {
+  font-size: 10px;
+  color: #718096;
+}
+.menu-btn {
+  display: none;
+}
+.backdrop {
+  display: none;
+}
+@media (max-width: 1120px) {
+  .content {
+    margin-left: 220px;
+  }
+  .sidebar {
+    width: 220px;
+  }
+}
+@media (max-width: 760px) {
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    width: 260px;
+    box-shadow: 5px 0 22px #0b1f3a40;
+  }
+  .sidebar.mobile-open {
+    transform: none;
+  }
+  .close {
+    display: block;
+  }
+  .content {
+    margin-left: 0;
+  }
+  .topbar {
+    height: auto;
+    min-height: 74px;
+    padding: 14px 18px;
+    gap: 12px;
+  }
+  .menu-btn {
+    display: block;
+    border: 0;
+    background: white;
+    color: #253858;
+  }
+  .title p {
+    display: none;
+  }
+  .title h1 {
+    margin: 0;
+    font-size: 19px;
+  }
+  .header-actions {
+    margin-left: auto;
+    gap: 10px;
+  }
+  .profile {
+    border-left: 0;
+    padding: 0;
+  }
+  .backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: #0b1f3a55;
+    border: 0;
+    z-index: 15;
+  }
+}
+@media (max-width: 430px) {
+  .icon-button {
+    display: none;
+  }
+}

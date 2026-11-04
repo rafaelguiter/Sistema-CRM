@@ -23,3 +23,10 @@ Atualize este arquivo ao adicionar novos requisitos, decisões importantes ou pr
 - Instaladas as dependências existentes e os pacotes de tipos necessários ao TypeScript; gerado `pnpm-lock.yaml`.
 - Corrigidas a inicialização do React e a tipagem do tooltip para executar e compilar o Dashboard.
 - Validado `corepack pnpm build`; os demais módulos continuam como etapas futuras.
+
+## Organização para manutenção
+
+- Solicitação: estruturar todo o código para facilitar a manutenção posterior, preservando o escopo inicial.
+- Extraídos layout compartilhado, componentes do Dashboard, contratos de domínio, cálculos puros e hook de estado e dados.
+- Separados os estilos por responsabilidade; adicionados formatação automática, testes dos cálculos e documentação de manutenção.
+- Valores dos mocks e ações ainda não implementadas foram preservados e documentados.
