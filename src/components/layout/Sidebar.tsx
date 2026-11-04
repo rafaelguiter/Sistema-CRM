@@ -9,11 +9,12 @@ import {
   UserRoundPlus,
   X,
 } from 'lucide-react'
+import { NavLink } from 'react-router-dom'
 import { cn } from '../../lib/utils'
 const nav = [
-  { label: 'Dashboard', icon: LayoutDashboard },
+  { label: 'Dashboard', icon: LayoutDashboard, to: '/dashboard' },
   { label: 'Leads', icon: UserRoundPlus },
-  { label: 'Clientes', icon: Users },
+  { label: 'Clientes', icon: Users, to: '/clientes' },
   { label: 'Oportunidades', icon: BriefcaseBusiness },
   { label: 'Funil de Vendas', icon: Target },
   { label: 'Atividades', icon: CalendarDays },
@@ -40,16 +41,26 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
         </button>
       </div>
       <nav>
-        {nav.map(({ label, icon: Icon }) => (
-          <button
-            className={cn('nav-link', label === 'Dashboard' && 'active')}
-            key={label}
-          >
-            <Icon size={19} />
-            <span>{label}</span>
-            {label === 'Leads' && <em>12</em>}
-          </button>
-        ))}
+        {nav.map(({ label, icon: Icon, to }) =>
+          to ? (
+            <NavLink
+              to={to}
+              className={({ isActive }) => cn('nav-link', isActive && 'active')}
+              key={label}
+              onClick={onClose}
+            >
+              <Icon size={19} />
+              <span>{label}</span>
+              {label === 'Leads' && <em>12</em>}
+            </NavLink>
+          ) : (
+            <button className="nav-link" key={label} type="button">
+              <Icon size={19} />
+              <span>{label}</span>
+              {label === 'Leads' && <em>12</em>}
+            </button>
+          ),
+        )}
       </nav>
       <div className="side-bottom">
         <button className="nav-link">
